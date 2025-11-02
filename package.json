@@ -1,0 +1,18 @@
+{
+  "name": "vscode-chat-langchain-bridge",
+  "version": "0.1.0",
+  "description": "Bridge between VSCode Chat Extensions and LangChain/LangGraph agents.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["vscode", "langchain", "langgraph", "llm", "extension"],
+  "author": "Juan Rodriguez jitrodriguez@hotmail.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jitrodriguez/vscode-chat-langchain-bridge.git"
+  }
+}
