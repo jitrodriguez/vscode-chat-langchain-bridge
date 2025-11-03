@@ -1,18 +1,69 @@
 {
   "name": "vscode-chat-langchain-bridge",
   "version": "0.1.0",
-  "description": "Bridge between VSCode Chat Extensions and LangChain/LangGraph agents.",
+  "description": "Create VS Code Chat participants (agents) with LangChain/LangGraph: tool-calling and streaming bridge for LanguageModelChat.",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": ["vscode", "langchain", "langgraph", "llm", "extension"],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "vscode",
+    "vs code",
+    "chat participant",
+    "chat agent",
+    "agent",
+    "LanguageModelChat",
+    "vscode.lm",
+    "Copilot",
+    "LangChain",
+    "LangGraph",
+    "tool calling",
+    "streaming",
+    "ai extension",
+    "createChatParticipant",
+    "registerChatParticipant"
+  ],
   "author": "Juan Rodriguez jitrodriguez@hotmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jitrodriguez/vscode-chat-langchain-bridge.git"
+  },
+  "peerDependencies": {
+    "@langchain/core": "^1.0.2",
+    "@langchain/langgraph": "^1.0.1",
+    "zod": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@langchain/langgraph": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.105.0"
   }
 }
