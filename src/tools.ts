@@ -58,8 +58,7 @@ export class ChatVSCodeTool<
     ) {
       // Second overload - VSCode tool invocation
       const options =
-        inputOrOptions as LanguageModelToolInvocationOptions<ZodObjectAny>
-      const token = configOrToken as CancellationToken
+        inputOrOptions as LanguageModelToolInvocationOptions<ZodObjectAny>;
       return super.invoke(options.input as any)
     } else {
       // First overload - Standard LangChain invocation

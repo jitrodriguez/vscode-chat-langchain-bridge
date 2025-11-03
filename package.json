@@ -3,18 +3,19 @@
   "version": "0.1.0",
   "description": "Create VS Code Chat participants (agents) with LangChain/LangGraph: tool-calling and streaming bridge for LanguageModelChat.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs"
     }
   },
   "sideEffects": false,
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "typecheck": "tsc --noEmit"
@@ -62,8 +63,9 @@
     "zod-to-json-schema": "^3.24.6"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
     "@types/node": "22.x",
-    "@types/vscode": "^1.105.0"
+    "@types/vscode": "^1.105.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
   }
 }

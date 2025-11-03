@@ -4,7 +4,7 @@ import { BaseChatModel } from '@langchain/core/language_models/chat_models';
 import { AIMessage, AIMessageChunk, BaseMessage, ToolCall, ToolMessage } from '@langchain/core/messages';
 import { ChatGeneration, ChatGenerationChunk, ChatResult } from '@langchain/core/outputs';
 import { Runnable } from '@langchain/core/runnables';
-import { CancellationToken, ChatResponseProgressPart, ChatResponseStream, LanguageModelChat, LanguageModelChatMessage, LanguageModelTextPart, LanguageModelToolCallPart, LanguageModelToolResultPart } from 'vscode';
+import { CancellationToken, ChatResponseProgressPart, ChatResponseStream, LanguageModelChat, LanguageModelChatMessage, LanguageModelTextPart, LanguageModelToolCallPart } from 'vscode';
 import { convertBaseMessage, toVSCodeChatTool } from './utils.js';
 import { ChatVSCodeCallOptions, ChatVSCodeFields, ChatVSCodeToolType } from './types.js';
 
@@ -134,7 +134,7 @@ export class ChatVSCode extends BaseChatModel<
             }
 
             if (part instanceof LanguageModelTextPart) {
-                console.log("Received text part from model stream:", part);
+                // console.log("Received text part from model stream:", part);
                 const chunk = new ChatGenerationChunk({
                     text: part.value,
                     message: new AIMessageChunk(part.value),
@@ -142,12 +142,12 @@ export class ChatVSCode extends BaseChatModel<
                 runManager?.handleLLMNewToken(part.value);
                 yield chunk;
             } else if (part instanceof LanguageModelToolCallPart) {
-                console.log("Received tool call part from model stream:", part);
+                // console.log("Received tool call part from model stream:", part);
                 const chunkMessage = new AIMessageChunk({
                     tool_call_chunks: [
                         {
                             name: part.name,
-                            args: JSON.stringify(part.input), // Los chunks de tool call son strings
+                            args: JSON.stringify(part.input), // Chunk the input as a JSON string
                             id: part.callId,
                             type: 'tool_call_chunk',
                         }
@@ -170,10 +170,7 @@ export class ChatVSCode extends BaseChatModel<
         tools: ChatVSCodeToolType[],
         kwargs?: Partial<ChatVSCodeCallOptions> | undefined
     ): Runnable<BaseLanguageModelInput, AIMessageChunk, ChatVSCodeCallOptions> {
-        let strict: boolean | undefined;
-
         if (kwargs && 'strict' in kwargs) {
-            strict = kwargs.strict as any;
             delete kwargs.strict;
         }
 

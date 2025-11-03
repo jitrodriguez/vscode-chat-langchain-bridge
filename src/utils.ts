@@ -17,7 +17,7 @@ export function toVSCodeChatTool(tool: ChatVSCodeToolType): ChatVSCodeTool {
       name: tool.name,
       description: tool.description,
       schema: tool.schema as ChatVSCodeToolInput['schema'],
-      func: (input, runManager?, config?) => {
+      func: (input, _?, config?) => {
         return tool.invoke(input, config)
       },
     })
@@ -27,7 +27,7 @@ export function toVSCodeChatTool(tool: ChatVSCodeToolType): ChatVSCodeTool {
       name: tool.name,
       description: tool.description,
       schema: tool.schema as ChatVSCodeToolInput['schema'],
-      func: (input, runManager?, config?) => {
+      func: (input, _?, config?) => {
         return tool.invoke(input, config);
       },
     })
