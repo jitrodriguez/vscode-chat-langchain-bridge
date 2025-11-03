@@ -8,9 +8,8 @@ import {
   LanguageModelToolInvocationOptions,
   LanguageModelToolResult,
   ProviderResult,
-  CancellationTokenSource
 } from 'vscode';
-import type { z } from 'zod';
+import type { z } from 'zod/v3';
 
 import { zodToJsonSchema } from 'zod-to-json-schema';
 import { ChatVSCodeToolInput, ZodObjectAny } from './types.js';
@@ -37,32 +36,30 @@ export class ChatVSCodeTool<
     input: string | ToolCall | { [x: string]: any },
     config?: RunnableConfig
   ): Promise<any>
-  invoke<T>(
+  invoke(
     options: LanguageModelToolInvocationOptions<
       z.infer<T extends ZodObjectAny ? T : ZodObjectAny>
     >,
     token: CancellationToken
   ): ProviderResult<LanguageModelToolResult>
 
-  async invoke<T>(
+  invoke(
     inputOrOptions:
       | string
       | ToolCall
       | { [x: string]: any }
       | LanguageModelToolInvocationOptions<ZodObjectAny>,
     configOrToken?: RunnableConfig | CancellationToken
-  ): Promise<any> {
+  ): Promise<any> | ProviderResult<LanguageModelToolResult> {
     if (
       inputOrOptions &&
       typeof inputOrOptions === 'object' &&
-      'input' in inputOrOptions &&
-      configOrToken instanceof CancellationTokenSource
+      'input' in inputOrOptions
     ) {
       // Second overload - VSCode tool invocation
       const options =
-        inputOrOptions as LanguageModelToolInvocationOptions<T>;
-      
-      super.invoke(options.input as any);
+        inputOrOptions as LanguageModelToolInvocationOptions<ZodObjectAny>;
+      return super.invoke(options.input as any)
     } else {
       // First overload - Standard LangChain invocation
       const input = inputOrOptions as string | ToolCall | { [x: string]: any }
