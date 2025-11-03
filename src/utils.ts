@@ -1,8 +1,8 @@
-import { DynamicStructuredTool, StructuredTool } from '@langchain/core/tools';
 import { AIMessage, BaseMessage, ContentBlock, HumanMessage, MessageContent, SystemMessage, ToolCall, ToolMessage } from '@langchain/core/messages';
+import { DynamicStructuredTool, StructuredTool } from '@langchain/core/tools';
 import { ChatContext, ChatRequestTurn, ChatResponseAnchorPart, ChatResponseMarkdownPart, ChatResponseTurn, LanguageModelChatMessage, LanguageModelTextPart, LanguageModelToolCallPart, LanguageModelToolResultPart, Uri } from 'vscode';
-import { ChatVSCodeToolInput, ChatVSCodeToolType } from './types.js';
 import { ChatVSCodeTool } from './tools.js';
+import { ChatVSCodeToolInput, ChatVSCodeToolType } from './types.js';
 
 /**
  * Ensures every LangChain tool is wrapped in a ChatVSCodeTool instance that
@@ -12,22 +12,22 @@ export function toVSCodeChatTool(tool: ChatVSCodeToolType): ChatVSCodeTool {
   if (tool instanceof ChatVSCodeTool) {
     return tool as ChatVSCodeTool
   }
-  if (tool instanceof DynamicStructuredTool) {
+  if (isDynamicStructuredTool(tool)) {
     return new ChatVSCodeTool({
       name: tool.name,
       description: tool.description,
       schema: tool.schema as ChatVSCodeToolInput['schema'],
-      func: (input, _?, config?) => {
+      func: (input, runManager?, config?) => {
         return tool.invoke(input, config)
       },
     })
   }
-  if (tool instanceof StructuredTool) {
+  if (isStructuredTool(tool)) {
     return new ChatVSCodeTool({
       name: tool.name,
       description: tool.description,
       schema: tool.schema as ChatVSCodeToolInput['schema'],
-      func: (input, _?, config?) => {
+      func: (input, runManager?, config?) => {
         return tool.invoke(input, config);
       },
     })
@@ -208,3 +208,20 @@ export function chatResponseToString(response: ChatResponseTurn): string {
 		})
 		.join('');
 }
+
+function isDynamicStructuredTool(
+  tool: ChatVSCodeToolType
+): tool is DynamicStructuredTool {
+  return (
+    tool instanceof DynamicStructuredTool
+  );
+}
+
+function isStructuredTool(
+  tool: ChatVSCodeToolType
+): tool is StructuredTool {
+  return (
+    tool instanceof StructuredTool
+  );
+}
+

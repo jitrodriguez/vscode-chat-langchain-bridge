@@ -1,25 +1,21 @@
-// src/types.ts
-import type { BaseFunctionCallOptions } from '@langchain/core/language_models/base';
-import type { BaseChatModelParams } from '@langchain/core/language_models/chat_models';
-import type {
-  DynamicStructuredTool, DynamicStructuredToolInput, DynamicTool, StructuredTool
-} from '@langchain/core/tools';
-import type {
-  LanguageModelChat, CancellationToken, LanguageModelChatRequestOptions, ChatResponseStream
-} from 'vscode';
-import type { z } from 'zod';
-import type { ChatVSCodeTool } from './tools.js';
+import { BaseFunctionCallOptions } from '@langchain/core/language_models/base';
+import { BaseChatModelParams } from '@langchain/core/language_models/chat_models';
+import { DynamicStructuredTool, DynamicStructuredToolInput, DynamicTool, StructuredTool } from '@langchain/core/tools';
+import { CancellationToken, ChatResponseStream, LanguageModelChat, LanguageModelChatRequestOptions } from 'vscode';
+import { z } from 'zod';
+import { ChatVSCodeTool } from './tools.js';
 
-export interface VscodeBaseInput {
+
+export interface ChatVscodeBaseInput {
   model: LanguageModelChat;
   token: CancellationToken;
 }
 
 export interface ChatVSCodeCallOptions
-  extends LanguageModelChatRequestOptions, BaseFunctionCallOptions {}
+  extends LanguageModelChatRequestOptions, BaseFunctionCallOptions {};
 
 export interface ChatVSCodeFields
-  extends BaseChatModelParams, VscodeBaseInput {
+  extends BaseChatModelParams, ChatVscodeBaseInput {
   responseStream: ChatResponseStream;
 }
 

@@ -82,10 +82,6 @@ export class ChatVSCode extends BaseChatModel<
                 };
                 toolCalls.push(toolCall);
             } else {
-                console.log(
-                    'Is ChatResponseProgressPart:',
-                    part instanceof ChatResponseProgressPart
-                );
                 console.warn(`Unknown part type received from model stream:`);
                 console.warn(part);
                 const progressText = new ChatResponseProgressPart((part as any).value);
