@@ -1,3 +1,7 @@
+[![npm version](https://img.shields.io/npm/v/vscode-chat-langchain-bridge.svg)](https://www.npmjs.com/package/vscode-chat-langchain-bridge)
+![bundle size](https://img.shields.io/bundlephobia/minzip/vscode-chat-langchain-bridge)
+[![npm downloads](https://img.shields.io/npm/dm/vscode-chat-langchain-bridge.svg)](https://www.npmjs.com/package/vscode-chat-langchain-bridge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](#-license)
 # vscode-chat-langchain-bridge
 
 > **Create VS Code Chat participants (agents) with LangChain/LangGraph in minutes.** Wrap VS Code’s `LanguageModelChat` and get tool‑calling + streaming out of the box.
