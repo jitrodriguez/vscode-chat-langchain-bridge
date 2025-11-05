@@ -1,6 +1,6 @@
 {
   "name": "vscode-chat-langchain-bridge",
-  "version": "0.1.6-beta.0",
+  "version": "0.1.6",
   "description": "Create VS Code Chat participants (agents) with LangChain/LangGraph: tool-calling and streaming bridge for LanguageModelChat.",
   "type": "module",
   "main": "dist/index.cjs",
