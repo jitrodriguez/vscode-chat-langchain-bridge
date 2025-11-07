@@ -36,7 +36,7 @@ npm install --save-dev @types/vscode
 **Engines**  
 - Node: `>=18`
 
-⛔ **ESM ONLY** – your `package.json` should include `"type": "module"`.⛔
+⛔ **ESM ONLY**.⛔
 
 ---
 
