@@ -8,7 +8,7 @@
 
 Bridge between **VS Code Chat** participants and **LangChain**/**LangGraph** agents. It wraps a VS Code chat model as a LangChain `BaseChatModel` so you can compose it with chains/graphs, use Zod‑based tools, and keep streaming/tool‑calls working end‑to‑end.
 
-> ESM‑only • Node ≥ 18 • VS Code API ≥ 1.103 (Chat) • TypeScript ready
+> Node ≥ 20 • VS Code API ≥ 1.103 (Chat) • TypeScript ready
 
 ---
 
@@ -34,9 +34,7 @@ npm install --save-dev @types/vscode
 ```
 
 **Engines**  
-- Node: `>=18`
-
-⛔ **ESM ONLY**.⛔
+- Node: `>=20`
 
 ---
 
@@ -46,7 +44,8 @@ npm install --save-dev @types/vscode
 import {
   ChatVSCode,
   type ChatVSCodeFields,
-  type ChatVSCodeCallOptions
+  type ChatVSCodeCallOptions,
+  convertVscodeHistory, // converts vscode chat history to langchain format
 } from "vscode-chat-langchain-bridge";
 ```
 
